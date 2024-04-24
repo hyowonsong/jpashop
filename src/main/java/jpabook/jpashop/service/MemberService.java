@@ -1,4 +1,3 @@
-package jpabook.jpashop.service;public class MemberService {
 package jpabook.jpashop.service;
 
 import jpabook.jpashop.domain.Member;
