@@ -4,6 +4,10 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
+  # 타임리프 추가
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
 jpa:
   hibernate:
     ddl-auto: create
@@ -13,8 +17,9 @@ jpa:
     format_sql: true
 
 logging.level:
-  # ? ??? logger? ?? ?????? ?? SQL? ???.
   org.hibernate.SQL: debug
+
+
 
 # org.hibernate.type: trace #??? ?? 2.x, hibernate5
 # org.hibernate.orm.jdbc.bind: trace #??? ?? 3.x, hibernate6
