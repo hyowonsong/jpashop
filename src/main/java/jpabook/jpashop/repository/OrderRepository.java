@@ -63,7 +63,7 @@ public class OrderRepository {
         return query.getResultList();
     }
 
-    // API 를 위해 OrderRepository 에 추가 (V3)
+    // API 를 위해 OrderRepository 에 추가 (기본 - V3)
     public List<Order> findAllWithMemberDelivery() {
         return em.createQuery(
                         "select o from Order o" +
@@ -72,4 +72,25 @@ public class OrderRepository {
                 .getResultList();
     }
 
+    // 고급 - v3. API 개발 고급 - 페치 조인 최적화를 위해 추가
+    public List<Order> findAllWithItem() {
+        return em.createQuery(
+                        "select distinct o from Order o" +
+                                " join fetch o.member m" +
+                                " join fetch o.delivery d" +
+                                " join fetch o.orderItems oi" +
+                                " join fetch oi.item i", Order.class)
+                .getResultList();
+    }
+
+    // V3-1 페치 조인 최적화
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        return em.createQuery(
+                        "select o from Order o" +
+                                " join fetch o.member m" +
+                                " join fetch o.delivery d", Order.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
 }
